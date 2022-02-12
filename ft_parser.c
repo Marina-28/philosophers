@@ -67,5 +67,7 @@ int	ft_parser(t_data *data, char **argv)
 		if (data->numb_of_times == 0)
 		return (1);
 	}
+	else
+		data->numb_of_times = -1;
 	return (0);
 }

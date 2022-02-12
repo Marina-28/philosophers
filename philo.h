@@ -10,14 +10,16 @@
 
 typedef struct s_data
 {
-    int numb_of_ph;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int numb_of_times;
+    int				numb_of_ph;
+    int				time_to_die;
+    int				time_to_eat;
+    int				time_to_sleep;
+    int				numb_of_times;
+    pthread_mutex_t	*forks;
 }   t_data;
 
 int	ft_parser(t_data *data, char **argv);
+int ft_init_mutex(t_data *data);
 
 
 #endif

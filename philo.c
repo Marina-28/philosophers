@@ -25,5 +25,7 @@ int	main(int argc, char **argv)
 		return (ft_error("Too many arguments\n"));
 	if (ft_parser(&data, argv) == 1)
 		return (ft_error("Invalid argument\n"));
+	if (ft_init_mutex(&data) == 1)
+		return (ft_error("Malloc error\n"));
 	return (0);
 }
