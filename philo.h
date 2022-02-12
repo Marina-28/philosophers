@@ -18,8 +18,19 @@ typedef struct s_data
     pthread_mutex_t	*forks;
 }   t_data;
 
+
+typedef struct s_philo
+{
+    int             num;
+	int				count_eat;
+	long long		last_eat;
+    pthread_mutex_t left;
+    pthread_mutex_t right;
+}   t_philo;
+
 int	ft_parser(t_data *data, char **argv);
 int ft_init_mutex(t_data *data);
-
+long long	ft_current_time(void);
+int ft_init_philo(t_data *data, t_philo **philo);
 
 #endif
