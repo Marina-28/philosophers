@@ -25,6 +25,7 @@ long long	ft_current_time(void)
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
 }
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -38,5 +39,7 @@ int	main(int argc, char **argv)
 		return (ft_error("Invalid argument\n"));
 	if (ft_init_mutex(&data) == 1 || ft_init_philo(&data, &philo) == 1)
 		return (ft_error("Malloc error\n"));
+	if (ft_init_pthread(&data, &philo) == 1)
+		return (ft_error("Pthread error \n"));
 	return (0);
 }

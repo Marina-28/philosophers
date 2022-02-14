@@ -39,3 +39,18 @@ int ft_init_philo(t_data *data, t_philo **philo)
     }
 	return (0);
 }
+
+int ft_init_pthread(t_data *data, t_philo **philo)
+{
+    int i;
+
+    i = 0;
+    data->time_of_start = ft_current_time();
+    while (i < data->numb_of_ph)
+    {
+        if (pthread_create(philo[i]->t, NULL, &start_routine, &philo[i]) != 0)
+            return (1);
+           i++;
+    }
+    return (0);
+}
