@@ -14,6 +14,10 @@ int ft_init_mutex(t_data *data)
         pthread_mutex_init(&data->forks[i], NULL);
         i++;
     }
+	pthread_mutex_init(&data->printf, NULL);
+	pthread_mutex_init(&data->mutex, NULL);
+	pthread_mutex_init(&data->somebody_died, NULL);
+    pthread_mutex_init(&data->count_eat, NULL);
     return (0);
 }
 
@@ -31,6 +35,7 @@ int ft_init_philo(t_data *data, t_philo **philo)
 		philo[i]->count_eat = 0;
 		philo[i]->last_eat = ft_current_time();
 		philo[i]->left = data->forks[i];
+		philo[i]->data = data;
 		if ((i + 1) == data->numb_of_ph)
 			philo[i]->right = data->forks[0];
 		else
@@ -48,9 +53,10 @@ int ft_init_pthread(t_data *data, t_philo **philo)
     data->time_of_start = ft_current_time();
     while (i < data->numb_of_ph)
     {
-        if (pthread_create(philo[i]->t, NULL, &start_routine, &philo[i]) != 0)
+        if (pthread_create(&philo[i]->t, NULL, &routine, &(*(philo[i]))) != 0)
             return (1);
-           i++;
+		pthread_detach(philo[i]->t);
+        i++;
     }
     return (0);
 }

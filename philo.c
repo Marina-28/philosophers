@@ -18,12 +18,22 @@ int	ft_error(char *s)
 
 long long	ft_current_time(void)
 {
-	long long		time;
+	unsigned long long		time;
 	struct timeval	current_time;
 	
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
+}
+
+void	ft_printf_log(t_philo *philo, char *s)
+{
+	unsigned long long	time;
+
+	time = ft_current_time() - philo->data->time_of_start;
+	pthread_mutex_lock(&philo->data->printf);
+	printf("%llu %d %s\n", time, philo->num, s);
+	pthread_mutex_unlock(&philo->data->printf);
 }
 
 int	main(int argc, char **argv)
@@ -41,5 +51,7 @@ int	main(int argc, char **argv)
 		return (ft_error("Malloc error\n"));
 	if (ft_init_pthread(&data, &philo) == 1)
 		return (ft_error("Pthread error \n"));
+	pthread_mutex_lock(&data.somebody_died);
+	//ft_free();
 	return (0);
 }
