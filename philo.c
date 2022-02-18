@@ -31,9 +31,9 @@ void	ft_printf_log(t_philo *philo, char *s)
 	unsigned long long	time;
 
 	time = ft_current_time() - philo->data->time_of_start;
-	pthread_mutex_lock(&philo->data->printf);
+	pthread_mutex_lock(&philo->data->print);
 	printf("%llu %d %s\n", time, philo->num, s);
-	pthread_mutex_unlock(&philo->data->printf);
+	pthread_mutex_unlock(&philo->data->print);
 }
 
 int	main(int argc, char **argv)
@@ -49,9 +49,8 @@ int	main(int argc, char **argv)
 		return (ft_error("Invalid argument\n"));
 	if (ft_init_mutex(&data) == 1 || ft_init_philo(&data, &philo) == 1)
 		return (ft_error("Malloc error\n"));
-	if (ft_init_pthread(&data, &philo) == 1)
-		return (ft_error("Pthread error \n"));
-	pthread_mutex_lock(&data.somebody_died);
-	//ft_free();
+	if (ft_init_pthread(&data, philo) == 1)
+		return (ft_error("Pthread error\n"));
+	pthread_mutex_lock(&data.death);
 	return (0);
 }
