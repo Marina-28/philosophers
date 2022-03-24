@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjeana <bjeana@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/03 18:54:30 by bjeana            #+#    #+#             */
+/*   Updated: 2022/03/19 16:35:46 by bjeana           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	ft_atoi(const char *str)
@@ -22,6 +34,8 @@ static int	ft_atoi(const char *str)
 		n = n * 10 + k * (*str - 48);
 		str++;
 	}
+	if (n > 2147483647 || n < -2147483648)
+		return (0);
 	return (n);
 }
 
@@ -49,8 +63,8 @@ int	ft_parser(t_data *data, char **argv)
 {
 	if (check_digits(argv) == 1)
 		return (1);
-	data->numb_of_ph = ft_atoi(argv[1]);
-	if (data->numb_of_ph == 0)
+	data->nop = ft_atoi(argv[1]);
+	if (data->nop == 0)
 		return (1);
 	data->time_to_die = ft_atoi(argv[2]);
 	if (data->time_to_die == 0)
@@ -65,9 +79,11 @@ int	ft_parser(t_data *data, char **argv)
 	{
 		data->numb_of_times = ft_atoi(argv[5]);
 		if (data->numb_of_times == 0)
-		return (1);
+			return (1);
 	}
 	else
 		data->numb_of_times = -1;
+	data->dead = 0;
+	data->counter = 0;
 	return (0);
 }
