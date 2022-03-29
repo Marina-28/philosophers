@@ -6,7 +6,7 @@
 /*   By: bjeana <bjeana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:51:27 by bjeana            #+#    #+#             */
-/*   Updated: 2022/03/20 18:09:04 by bjeana           ###   ########.fr       */
+/*   Updated: 2022/03/29 19:11:44 by bjeana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	ft_free_stop(t_philo *philo)
 		sem_close(philo[i].stop);
 		name = ft_name(i);
 		if (name == NULL)
-			return (1);
+		{
+			write(1, "Malloc fatal error\n", 19);
+			exit (1);
+		}
 		sem_unlink(name);
 		free(name);
 		i++;
@@ -62,7 +65,6 @@ void	ft_free_stop(t_philo *philo)
 void	ft_sem_unlink(t_data *data, t_philo *philo)
 {
 	int		i;
-	char	*name;
 
 	i = 0;
 	sem_close(data->death);
