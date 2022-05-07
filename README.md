@@ -49,3 +49,10 @@ a semaphore.
 * Each philosopher should be a process. But the main process should not be a
 philosopher.
 
+## Launch:
+```
+%>make
+%>./philo 4 310 200 200
+```
+*If you input this arguments, a philosopher should die!
+Strangely enough, a philosopher can starve to death while eating.*
